@@ -1,73 +1,214 @@
-# Welcome to your Lovable project
+# FitTracker - Fitness Tracking Application
 
-## Project info
+A comprehensive fitness tracking frontend application built with React, TypeScript, and Tailwind CSS. This application provides a complete interface for managing workouts, nutrition, goals, and daily steps.
 
-**URL**: https://lovable.dev/projects/4a3e44ff-6a8e-4e6e-ab56-10bc9c4bf7d8
+## 🌟 Features
 
-## How can I edit this code?
+- **Authentication System**: Complete user authentication with login, registration, and token management
+- **Dashboard**: Overview of all fitness metrics in one place
+- **Workouts**: Track exercise sessions with duration, calories, and intensity
+- **Goals**: Set and monitor fitness objectives with progress tracking
+- **Meals**: Log nutrition information and track daily calorie intake
+- **Steps**: Record daily step counts with detailed metrics
+- **Profile Management**: Update user information and preferences
 
-There are several ways of editing your application.
+## 🚀 Getting Started
 
-**Use Lovable**
+### Prerequisites
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/4a3e44ff-6a8e-4e6e-ab56-10bc9c4bf7d8) and start prompting.
+- Node.js (v16 or higher)
+- npm or yarn
 
-Changes made via Lovable will be committed automatically to this repo.
+### Installation
 
-**Use your preferred IDE**
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd <project-directory>
+```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+2. Install dependencies:
+```bash
+npm install
+```
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+3. Configure environment variables:
+```bash
+cp .env.example .env
+```
 
-Follow these steps:
+Edit `.env` and set your API base URL:
+```
+VITE_API_BASE_URL=https://your-api-url.com
+```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+4. Start the development server:
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+The application will be available at `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## 🧪 Running Tests
 
-**Use GitHub Codespaces**
+Run the test suite:
+```bash
+npm run test
+```
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+Run tests in watch mode:
+```bash
+npm run test:watch
+```
 
-## What technologies are used for this project?
+Generate coverage report:
+```bash
+npm run test:coverage
+```
 
-This project is built with:
+## 🏗️ Project Structure
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+```
+src/
+├── components/          # Reusable UI components
+│   ├── layout/         # Layout components (Sidebar, DashboardLayout)
+│   ├── ui/             # shadcn/ui components
+│   └── ProtectedRoute.tsx
+├── contexts/           # React contexts (AuthContext)
+├── lib/               # Utilities and API clients
+│   ├── api.ts         # Core API functions and validation
+│   └── apiClient.ts   # API endpoint definitions
+├── pages/             # Page components
+│   ├── Auth.tsx       # Login/Registration
+│   ├── Dashboard.tsx  # Main dashboard
+│   ├── Workouts.tsx   # Workout management
+│   ├── Goals.tsx      # Goal tracking
+│   ├── Meals.tsx      # Nutrition logging
+│   ├── Steps.tsx      # Step tracking
+│   └── Profile.tsx    # User profile
+└── test/              # Test utilities and setup
+```
 
-## How can I deploy this project?
+## 🎨 Design System
 
-Simply open [Lovable](https://lovable.dev/projects/4a3e44ff-6a8e-4e6e-ab56-10bc9c4bf7d8) and click on Share -> Publish.
+The application uses a custom design system with:
+- **Primary Color**: Vibrant blue (#0080FF)
+- **Secondary Color**: Green (#16A34A)
+- **Accent Color**: Orange (#F97316)
+- **Semantic tokens** for consistent theming
+- **HSL color system** for easy customization
 
-## Can I connect a custom domain to my Lovable project?
+## 🔒 Authentication
 
-Yes, you can!
+The app implements JWT-based authentication with:
+- Access token for API requests
+- Refresh token for automatic token renewal
+- Automatic redirect on token expiration
+- Protected routes requiring authentication
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## 📱 API Integration
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+All API endpoints from the Postman collection are integrated:
+
+### Authentication
+- POST `/api/auth/register/` - User registration
+- POST `/api/auth/login/` - User login
+- POST `/api/auth/token/refresh/` - Refresh access token
+- POST `/api/auth/logout/` - User logout
+- GET `/api/auth/profile/` - Get user profile
+- PATCH `/api/auth/profile/` - Update user profile
+
+### Workouts
+- GET/POST `/api/workouts/workouts/` - List/Create workouts
+- GET/PATCH/DELETE `/api/workouts/workouts/{id}/` - Manage specific workout
+- GET `/api/workouts/workouts/today/` - Today's workouts
+- GET `/api/workouts/workouts/this_week/` - This week's workouts
+- GET `/api/workouts/workouts/summary/` - Workout summary
+- POST `/api/workouts/workouts/{id}/start/` - Start workout
+- POST `/api/workouts/workouts/{id}/complete/` - Complete workout
+- POST `/api/workouts/workouts/{id}/skip/` - Skip workout
+
+### Goals
+- GET/POST `/api/workouts/goals/` - List/Create goals
+- GET/PATCH/DELETE `/api/workouts/goals/{id}/` - Manage specific goal
+- POST `/api/workouts/goals/{id}/update_progress/` - Update goal progress
+- GET `/api/workouts/goals/summary/` - Goals summary
+
+### Meals
+- GET/POST `/api/meals/meals/` - List/Create meals
+- GET/PATCH/DELETE `/api/meals/meals/{id}/` - Manage specific meal
+- GET `/api/meals/meals/today/` - Today's meals
+- GET `/api/meals/meals/summary/` - Meals summary
+
+### Steps
+- GET/POST `/api/steps/daily/` - List/Create daily steps
+- GET/PATCH/DELETE `/api/steps/daily/{id}/` - Manage specific entry
+- GET `/api/steps/daily/today/` - Today's steps
+- POST `/api/steps/daily/quick_log/` - Quick log steps
+- GET `/api/steps/daily/weekly/` - Weekly steps
+- GET `/api/steps/daily/monthly/` - Monthly steps
+- GET `/api/steps/daily/summary/` - Steps summary
+
+## 🛡️ Input Validation
+
+The application includes comprehensive input validation using Zod schemas:
+- Email validation
+- Password strength requirements
+- Field length limits
+- Data type validation
+- Custom validation rules
+
+## 🎯 Error Handling
+
+- API errors with detailed messages
+- Toast notifications for user feedback
+- Loading states during API calls
+- Graceful fallbacks for failed requests
+
+## 📦 Technologies Used
+
+- **React 18** - UI library
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Styling
+- **React Router** - Navigation
+- **React Hook Form** - Form management
+- **Zod** - Schema validation
+- **TanStack Query** - Data fetching
+- **Lucide React** - Icons
+- **shadcn/ui** - UI components
+- **Sonner** - Toast notifications
+- **Vitest** - Testing framework
+
+## 🔧 Configuration
+
+### Environment Variables
+
+- `VITE_API_BASE_URL` - Base URL for the API (required)
+
+### Build Configuration
+
+The project uses Vite for fast builds and hot module replacement. Configuration can be found in `vite.config.ts`.
+
+## 📝 Development Guidelines
+
+1. **Components**: Create small, focused components
+2. **Styling**: Use design system tokens from `index.css`
+3. **API Calls**: Use the `apiClient` functions
+4. **Forms**: Use React Hook Form with Zod validation
+5. **State**: Use React Context for global state
+6. **Testing**: Write tests for critical functionality
+
+## 🤝 Contributing
+
+1. Follow the existing code style
+2. Write tests for new features
+3. Update documentation as needed
+4. Use semantic commit messages
+
+## 📄 License
+
+This project is part of the FitTracker application.
+
+## 🆘 Support
+
+For issues or questions, please refer to the API documentation or contact the development team.
